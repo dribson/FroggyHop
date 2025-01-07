@@ -37,6 +37,10 @@ public class UIController : MonoBehaviour
     [SerializeField] [Tooltip("Moves All Menus Simultaneously")] Transform Menus;
     [SerializeField] [Tooltip("Pops Up When Purchasing Something")] Transform ShopShowcase;
 
+    [SerializeField] [Tooltip("Scaling MenuArea Transform")] RectTransform MenuArea;
+    [SerializeField] [Tooltip("Scaling CustomizeArea Transform")] RectTransform CustomizeArea;
+    [SerializeField] [Tooltip("Scaling ShopArea Transform")] RectTransform ShopArea;
+
     [Header("Images")]
 
     [SerializeField] [Tooltip("Skin Preview Image")] Image SkinPreview;
@@ -80,7 +84,7 @@ public class UIController : MonoBehaviour
 
     GameController GC;
 
-    int equippedSkin, equippedHat, equippedTrail;
+    int equippedSkin, equippedHat, equippedTrail, screenWidth = Screen.width;
 
     #endregion
 
@@ -98,6 +102,22 @@ public class UIController : MonoBehaviour
         TrailPreview.Play();
         ChangeCustomTab(0);
         ChangeShopTab(0);
+        UpdateUIScalePerScreen(screenWidth);
+    }
+
+    /// <summary>
+    /// Update the width of the Menu UI to match the width of the screen, and adjust Customization/Shop tab positions to smoothly tween positions from updated widths
+    /// </summary>
+    void UpdateUIScalePerScreen(float width)
+    {
+        // TODO update the UI to scale appropriately with different screen widths/heights
+        Vector2 ScreenUIScale = new Vector2(width, Screen.height);
+        MenuArea.sizeDelta = ScreenUIScale;
+        CustomizeArea.sizeDelta = ScreenUIScale;
+        ShopArea.sizeDelta = ScreenUIScale;
+        MenuArea.localPosition = new Vector2(0, 0);
+        CustomizeArea.localPosition = new Vector2(width, 0);
+        ShopArea.localPosition = new Vector2(width * 2, 0);
     }
 
     public void BeginGame()
@@ -134,7 +154,7 @@ public class UIController : MonoBehaviour
                 Menus.position = t.CurrentValue;
             };
             tweenStartPos = Menus.position;
-            tweenEndPos = tweenStartPos - new Vector2(Screen.width, 0);
+            tweenEndPos = tweenStartPos - new Vector2(screenWidth, 0);
             Menus.gameObject.Tween("TweenMenuLeft", tweenStartPos, tweenEndPos, 0.75f, TweenScaleFunctions.CubicEaseInOut, TweenLeft);
             UpdateTokenCount();
             ChangeCustomTab(0);
@@ -154,7 +174,7 @@ public class UIController : MonoBehaviour
                 Menus.position = t.CurrentValue;
             };
             tweenStartPos = Menus.position;
-            tweenEndPos = tweenStartPos + new Vector2(Screen.width, 0);
+            tweenEndPos = tweenStartPos + new Vector2(screenWidth, 0);
             Menus.gameObject.Tween("TweenMenuRight", tweenStartPos, tweenEndPos, 0.75f, TweenScaleFunctions.CubicEaseInOut, TweenRight);
             PlayerTrail.Clear();
             PlayerTrail.Stop();
@@ -172,7 +192,7 @@ public class UIController : MonoBehaviour
                 Menus.position = t.CurrentValue;
             };
             tweenStartPos = Menus.position;
-            tweenEndPos = tweenStartPos - new Vector2(Screen.width, 0);
+            tweenEndPos = tweenStartPos - new Vector2(screenWidth, 0);
             Menus.gameObject.Tween("TweenMenuLeft", tweenStartPos, tweenEndPos, 0.75f, TweenScaleFunctions.CubicEaseInOut, TweenLeft);
             UpdateTokenCount();
         }
@@ -188,7 +208,7 @@ public class UIController : MonoBehaviour
                 Menus.position = t.CurrentValue;
             };
             tweenStartPos = Menus.position;
-            tweenEndPos = tweenStartPos + new Vector2(Screen.width, 0);
+            tweenEndPos = tweenStartPos + new Vector2(screenWidth, 0);
             Menus.gameObject.Tween("TweenMenuRight", tweenStartPos, tweenEndPos, 0.75f, TweenScaleFunctions.CubicEaseInOut, TweenRight);
             UpdateTokenCount();
         }
