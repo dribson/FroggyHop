@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 1998581099283476469, guid: c8a9199bc550cfa45a2b5f2b1e87f0dd, type: 3}
   - {fileID: 4446635723133183944, guid: 0e2e5d9ca7cc4a042b051192117e86e4, type: 3}
   - {fileID: 7995485986983768386, guid: 5e7dc7028bbd7314b9d2d4f4e2111db8, type: 3}
+  - {fileID: 7899018702097071293, guid: 052c54b1b7ce8c3499d86095d7db1d4e, type: 3}
   platChance: 35
   CollectableChance: 10
   MaxCollectables: 2
