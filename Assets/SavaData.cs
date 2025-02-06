@@ -18,7 +18,6 @@ public class SavaData : MonoBehaviour
     List<bool> SkinsPurchased, HatsPurchased, TrailsPurchased;
     int SkinEquipped, HatEquipped, TrailEquipped;
 
-    
     private void OnApplicationQuit()
     {
         SaveGame();

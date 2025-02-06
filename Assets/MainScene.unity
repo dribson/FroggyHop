@@ -5212,7 +5212,7 @@ GameObject:
   - component: {fileID: 526592128}
   - component: {fileID: 526592127}
   m_Layer: 5
-  m_Name: Content
+  m_Name: HatShopContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8119,7 +8119,7 @@ GameObject:
   - component: {fileID: 880637002}
   - component: {fileID: 880637001}
   m_Layer: 5
-  m_Name: Content
+  m_Name: TrailCustomContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9435,7 +9435,7 @@ GameObject:
   - component: {fileID: 1057217572}
   - component: {fileID: 1057217571}
   m_Layer: 5
-  m_Name: Content
+  m_Name: SkinCustomContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9765,7 +9765,7 @@ GameObject:
   - component: {fileID: 1108489318}
   - component: {fileID: 1108489317}
   m_Layer: 5
-  m_Name: Content
+  m_Name: TrailShopContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25305,7 +25305,7 @@ GameObject:
   - component: {fileID: 1867736588}
   - component: {fileID: 1867736587}
   m_Layer: 5
-  m_Name: Content
+  m_Name: SkinShopContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26510,73 +26510,12 @@ MonoBehaviour:
   TrailPreview: {fileID: 1299834221}
   ShopPreview: {fileID: 120747963}
   SecretHiddenFroggy: {fileID: 576195784}
-  SkinCustomList:
-  - {fileID: 225889092}
-  - {fileID: 1874589557}
-  - {fileID: 9159189}
-  - {fileID: 1861120939}
-  - {fileID: 545591311}
-  - {fileID: 675408899}
-  - {fileID: 814096250}
-  - {fileID: 1414293647}
-  - {fileID: 109796796}
-  - {fileID: 1363165290}
-  - {fileID: 242954411}
-  - {fileID: 2132297679}
-  - {fileID: 1205327168}
-  - {fileID: 599876612}
-  - {fileID: 1352862676}
-  - {fileID: 1832738894}
-  - {fileID: 99944575}
-  - {fileID: 2137045353}
-  - {fileID: 1644098497}
-  - {fileID: 1490491588}
-  - {fileID: 30053699}
-  - {fileID: 787006940}
-  - {fileID: 1072721290}
-  - {fileID: 83572425}
-  - {fileID: 2017407153}
-  HatCustomList:
-  - {fileID: 1988452173}
-  - {fileID: 1931250891}
-  - {fileID: 1977697366}
-  - {fileID: 1291051071}
-  - {fileID: 1291051071}
-  TrailCustomList:
-  - {fileID: 1205559800}
-  - {fileID: 369839642}
-  SkinShopList:
-  - {fileID: 1567929070}
-  - {fileID: 194573814}
-  - {fileID: 479338496}
-  - {fileID: 304066932}
-  - {fileID: 1122865567}
-  - {fileID: 1361466225}
-  - {fileID: 1888819443}
-  - {fileID: 1027300171}
-  - {fileID: 744700491}
-  - {fileID: 1265880844}
-  - {fileID: 1139174238}
-  - {fileID: 671332111}
-  - {fileID: 177771262}
-  - {fileID: 1694723712}
-  - {fileID: 63052106}
-  - {fileID: 184012938}
-  - {fileID: 401057974}
-  - {fileID: 1434734638}
-  - {fileID: 469792163}
-  - {fileID: 2025161990}
-  - {fileID: 466448753}
-  - {fileID: 1424238789}
-  - {fileID: 99315319}
-  - {fileID: 288828915}
-  HatShopList:
-  - {fileID: 237124922}
-  - {fileID: 587452483}
-  - {fileID: 1135062584}
-  - {fileID: 2039906965}
-  TrailShopList:
-  - {fileID: 457802192}
+  SkinCustom: {fileID: 1057217570}
+  HatCustom: {fileID: 2098532923}
+  TrailCustom: {fileID: 880637000}
+  SkinShop: {fileID: 1867736586}
+  HatShop: {fileID: 526592126}
+  TrailShop: {fileID: 1108489316}
   CustomSkinShowcase: {fileID: 1627458911}
   CustomHatShowcase: {fileID: 53741135}
   CustomTrailShowcase: {fileID: 611768080}
@@ -27494,7 +27433,7 @@ GameObject:
   - component: {fileID: 2098532925}
   - component: {fileID: 2098532924}
   m_Layer: 5
-  m_Name: Content
+  m_Name: HatCustomContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -51,14 +51,13 @@ public class UIController : MonoBehaviour
 
     // TODO Replace this with a script that auto populates based off of the children of the gameobjects in scene
     [Header("Button Lists")]
+    [SerializeField] [Tooltip("Skin Customize Viewport Content")] RectTransform SkinCustom;
+    [SerializeField] [Tooltip("Hat Customize Viewport Content")] RectTransform HatCustom;
+    [SerializeField] [Tooltip("Trail Customize Viewport Content")] RectTransform TrailCustom;
 
-    [SerializeField] [Tooltip("Buttons in CustomizeArea/SkinShowcase")] List<CustomizeButton> SkinCustomList;
-    [SerializeField] [Tooltip("Buttons in CustomizeArea/HatShowcase")] List<CustomizeButton> HatCustomList;
-    [SerializeField] [Tooltip("Buttons in CustomizeArea/TrailShowcase")] List<CustomizeButton> TrailCustomList;
-
-    [SerializeField] [Tooltip("Buttons in ShopArea/SkinShowcase")] List<ShopButton> SkinShopList;
-    [SerializeField] [Tooltip("Buttons in ShopArea/HatShowcase")] List<ShopButton> HatShopList;
-    [SerializeField] [Tooltip("Buttons in ShopArea/TrailShowcase")] List<ShopButton> TrailShopList;
+    [SerializeField] [Tooltip("Skin Shop Viewport Content")] RectTransform SkinShop;
+    [SerializeField] [Tooltip("Hat Shop Viewport Content")] RectTransform HatShop;
+    [SerializeField] [Tooltip("Trail Shop Viewport Content")] RectTransform TrailShop;
 
     [Header("Customize Showcases")]
     [SerializeField] [Tooltip("CustomizeArea/SkinShowcase")] RectTransform CustomSkinShowcase;
@@ -86,12 +85,17 @@ public class UIController : MonoBehaviour
 
     int equippedSkin, equippedHat, equippedTrail, screenWidth = Screen.width;
 
+    List<CustomizeButton> SkinCustomList = new List<CustomizeButton>(), HatCustomList = new List<CustomizeButton>(), TrailCustomList = new List<CustomizeButton>();
+
+    List<ShopButton> SkinShopList = new List<ShopButton>(), HatShopList = new List<ShopButton>(), TrailShopList = new List<ShopButton>();
+
     #endregion
 
 
     // Start is called before the first frame update
     void Start()
     {
+        InitializeShopButtons();
         GC = GetComponent<GameController>();
         allowMenuing = true;
         GameplayCanvas.enabled = false;
@@ -103,6 +107,19 @@ public class UIController : MonoBehaviour
         ChangeCustomTab(0);
         ChangeShopTab(0);
         UpdateUIScalePerScreen(screenWidth);
+    }
+
+    /// <summary>
+    /// Initializes shop UI from buttons that are children of a gameobject instead of lists in editor
+    /// </summary>
+    void InitializeShopButtons()
+    {
+        SkinCustomList.AddRange(SkinCustom.GetComponentsInChildren<CustomizeButton>());
+        HatCustomList.AddRange(HatCustom.GetComponentsInChildren<CustomizeButton>());
+        TrailCustomList.AddRange(TrailCustom.GetComponentsInChildren<CustomizeButton>());
+        SkinShopList.AddRange(SkinShop.GetComponentsInChildren<ShopButton>());
+        HatShopList.AddRange(HatShop.GetComponentsInChildren<ShopButton>());
+        TrailShopList.AddRange(TrailShop.GetComponentsInChildren<ShopButton>());
     }
 
     /// <summary>
