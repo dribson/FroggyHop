@@ -123,6 +123,30 @@ public class UIController : MonoBehaviour
     }
 
     /// <summary>
+    /// Scales shop screen scroll windows as shop items are removed
+    /// </summary>
+    /// <param name="rt">RectTransform to update</param>
+    void UpdateUIScrollScale(RectTransform rt)
+    {
+        int count = 0;
+        int scaleAmount = (int)rt.GetComponent<GridLayoutGroup>().cellSize.y + (int)rt.GetComponent<GridLayoutGroup>().spacing.y;
+        if (rt.name.Contains("Custom"))
+        {
+            // This is here if customization screen is updated to not show unowned items like how shop does not show owned items.
+            count = rt.GetComponentsInChildren<CustomizeButton>().Length;
+        }
+        else if (rt.name.Contains("Shop"))
+        {
+            count = rt.GetComponentsInChildren<ShopButton>().Length;
+        }
+        else
+        {
+            Debug.Log("ERROR: Unknown RectTransform provided: " + rt.name);
+        }
+        rt.sizeDelta = new Vector2(rt.localScale.x, ((((count - 1) / rt.GetComponent<GridLayoutGroup>().constraintCount) * scaleAmount) + scaleAmount));
+    }
+
+    /// <summary>
     /// Update the width of the Menu UI to match the width of the screen, and adjust Customization/Shop tab positions to smoothly tween positions from updated widths
     /// </summary>
     void UpdateUIScalePerScreen(float width)
@@ -256,8 +280,10 @@ public class UIController : MonoBehaviour
             TrailPreview.Clear();
             SecretHiddenFroggy.sprite = player.GetComponent<SpriteRenderer>().sprite;
             SecretHiddenFroggy.gameObject.SetActive(true);
-            //TrailPreview.Play();
-            
+            if (who.GetCustType() == CustomizeType.Trail)
+            {
+                UpdateTrailVariables(who.GetTrail());
+            }
         }
     }
 
@@ -267,6 +293,7 @@ public class UIController : MonoBehaviour
         noMoneyText.enabled = false;
         ShopShowcase.gameObject.SetActive(false);
         SecretHiddenFroggy.gameObject.SetActive(false);
+        UpdateTrailVariables(TrailCustomList[equippedTrail].GetParticle());
     }
 
     public void PurchaseItem()
@@ -277,6 +304,11 @@ public class UIController : MonoBehaviour
             UpdateTokenCount();
             loadedShopItem.MakePurchased();
             GetComponent<SavaData>().SaveGame();
+            // TODO get type of item loaded & only update shop scale for that type - shopbutton already has Type variable
+            UpdateUIScrollScale(SkinShop);
+            UpdateUIScrollScale(HatShop);
+            UpdateUIScrollScale(TrailShop);
+            // TODO see if can implement equipping the purchased item automatically. maybe add popup?
             CloseShop();
         }
         else
@@ -359,6 +391,9 @@ public class UIController : MonoBehaviour
             }
             iterator++;
         }
+        UpdateUIScrollScale(SkinShop);
+        UpdateUIScrollScale(HatShop);
+        UpdateUIScrollScale(TrailShop);
     }
 
     public void LoadEquippedItems(int Skin, int Hat, int Trail)

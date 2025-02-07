@@ -49,6 +49,10 @@ public class SavaData : MonoBehaviour
         {
             DeleteSaveData();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GC.ChangeTokenCount(100000);
+        }
     }
 
     public void SaveGame()

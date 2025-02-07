@@ -50,6 +50,11 @@ public class ShopButton : MonoBehaviour
         return Description;
     }
 
+    public ParticleSystem GetTrail()
+    {
+        return TrailEffect;
+    }
+
     public void MakePurchased()
     {
         isUnlocked = true;
