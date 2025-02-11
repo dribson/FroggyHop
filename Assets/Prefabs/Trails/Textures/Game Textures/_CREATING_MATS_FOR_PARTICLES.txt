@@ -1,0 +1,4 @@
+Create > Material
+Change Shader to Particles > Stnadard Unlit
+Change Albedo to desired texture
+Change Shader to UI > Unlit > Detail

@@ -522,14 +522,22 @@ public class UIController : MonoBehaviour
         // TODO pass in generic particle system so don't have to copy code here
         // TODO because unity particle systems FUCKIGN SUCK in code have to MANUALLY edit EACH PART of EACH NFUCKING COMPNENT I HATE THIS
         // Manual changes needed, confirm changes for new trails:
+        //  Main - Start Lifetime, Start Speed
         //  Emission - Rate over Time
         //  Shape - Radius, Arc, Rotation
         //  Size over Liftime - Size
         //  Renderer - Shared Material
 
+        ParticleSystem.MainModule playerMain = PlayerTrail.main, customMain = TrailPreview.main;
+        playerMain.startLifetime = tempPS.main.startLifetime;
+        customMain.startLifetime = tempPS.main.startLifetime;
+        playerMain.startSpeed = tempPS.main.startSpeed;
+        customMain.startSpeed = tempPS.main.startSpeed;
+
         ParticleSystem.EmissionModule playerEmission = PlayerTrail.emission, customEmission = TrailPreview.emission;
         playerEmission.rateOverTime = tempPS.emission.rateOverTime;
         customEmission.rateOverTime = tempPS.emission.rateOverTime;
+
         ParticleSystem.ShapeModule playerShape = PlayerTrail.shape, customShape = TrailPreview.shape;
         playerShape.radius = tempPS.shape.radius;
         playerShape.arc = tempPS.shape.arc;
@@ -537,9 +545,11 @@ public class UIController : MonoBehaviour
         customShape.radius = tempPS.shape.radius;
         customShape.arc = tempPS.shape.arc;
         customShape.rotation = tempPS.shape.rotation;
+
         ParticleSystem.SizeOverLifetimeModule playerSizeOverLifetime = PlayerTrail.sizeOverLifetime, customSizeOverLifetime = TrailPreview.sizeOverLifetime;
         playerSizeOverLifetime.size = tempPS.sizeOverLifetime.size;
         customSizeOverLifetime.size = tempPS.sizeOverLifetime.size;
+
         ParticleSystemRenderer playerRenderer = PlayerTrail.GetComponent<ParticleSystemRenderer>(), customRenderer = TrailPreview.GetComponent<ParticleSystemRenderer>();
         playerRenderer.sharedMaterial = tempPS.GetComponent<ParticleSystemRenderer>().sharedMaterial;
         customRenderer.sharedMaterial = tempPS.GetComponent<ParticleSystemRenderer>().sharedMaterial;
