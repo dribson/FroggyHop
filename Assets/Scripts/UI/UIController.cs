@@ -41,6 +41,10 @@ public class UIController : MonoBehaviour
     [SerializeField] [Tooltip("Scaling CustomizeArea Transform")] RectTransform CustomizeArea;
     [SerializeField] [Tooltip("Scaling ShopArea Transform")] RectTransform ShopArea;
 
+    [SerializeField] [Tooltip("Fadeout for Gameplay transitions")] RectTransform GameplayFadeout;
+    [SerializeField] [Tooltip("Height for Gameplay")] RectTransform GameplayHeight;
+    [SerializeField] [Tooltip("Score for Gameplay")] RectTransform GameplayScore;
+
     [Header("Images")]
 
     [SerializeField] [Tooltip("Skin Preview Image")] Image SkinPreview;
@@ -76,8 +80,8 @@ public class UIController : MonoBehaviour
 
     bool allowMenuing;
 
-    System.Action<ITween<Vector2>> TweenRight;
-    System.Action<ITween<Vector2>> TweenLeft;
+    System.Action<ITween<Vector2>> TweenRight, TweenLeft; // TODO add tweens for title + menu buttons in/out
+    System.Action<ITween<Color>> TweenFadeIn, TweenFadeOut;
 
     Vector2 tweenStartPos, tweenEndPos;
 
@@ -99,6 +103,7 @@ public class UIController : MonoBehaviour
         GC = GetComponent<GameController>();
         allowMenuing = true;
         GameplayCanvas.enabled = false;
+        GameplayFadeout.GetComponent<Image>().enabled = false;
         MenuCanvas.enabled = true;
         FailCanvas.enabled = false;
         noMoneyText.enabled = false;
@@ -163,9 +168,35 @@ public class UIController : MonoBehaviour
 
     public void BeginGame()
     {
+        GameplayHeight.gameObject.SetActive(false);
+        GameplayScore.gameObject.SetActive(false);
         GameplayCanvas.enabled = true;
+        GameplayFadeout.GetComponent<Image>().enabled = true;
+        StartCoroutine(FadeTransition());
+    }
+
+    IEnumerator FadeTransition()
+    {
+        // Tween Fade transparency to 0
+        TweenFadeIn = (t) =>
+        {
+            GameplayFadeout.GetComponent<Image>().color = t.CurrentValue;
+        };
+        Color startColor = new Color(.2f, .2f, .2f, 0), endColor = new Color(.2f, .2f, .2f, 1);
+        GameplayFadeout.gameObject.Tween("TweenFadeIn", startColor, endColor, 0.45f, TweenScaleFunctions.Linear, TweenFadeIn);
+        yield return new WaitForSeconds(0.65f);
+        // Enable score/height, update their text to 0, begin game w/out enabling frog
+        GameplayHeight.gameObject.SetActive(true);
+        GameplayScore.gameObject.SetActive(true);
         MenuCanvas.enabled = false;
         FailCanvas.enabled = false;
+        TweenFadeOut = (t) =>
+        {
+            GameplayFadeout.GetComponent<Image>().color = t.CurrentValue;
+        };
+        GameplayFadeout.gameObject.Tween("TweenFadeOut", endColor, startColor, 0.45f, TweenScaleFunctions.Linear, TweenFadeOut);
+        yield return new WaitForSeconds(0.45f);
+
     }
 
     public void EndGame(float points)

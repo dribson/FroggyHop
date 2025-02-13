@@ -23,11 +23,15 @@ public class GameController : MonoBehaviour
 
     public void BeginGame()
     {
-        Debug.Log("woaw");
+        UIC.BeginGame();
+        StartCoroutine(DelayStartGame());
+    }
+
+    IEnumerator DelayStartGame()
+    {
+        yield return new WaitForSeconds(0.5f);
         DestroyAllSectors();
         StartingSectors();
-        //phorg.StartGame();
-        UIC.BeginGame();
         StartCoroutine(InitFrog());
     }
 

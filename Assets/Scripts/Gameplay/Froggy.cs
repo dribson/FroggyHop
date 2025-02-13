@@ -38,15 +38,21 @@ public class Froggy : MonoBehaviour
     {
         StopAllCoroutines();
         ResetPositions();
-        isPlaying = true;
+        //isPlaying = true;
         score = maxHeight = savedHeight = 0;
-        HeightText.text = "Height: 0 ft";
+        HeightText.text = "Height: 0 ft"; // TODO move this into UI controller?
         ScoreText.text = "Points: 0";
         JumpTo.transform.position = transform.position + new Vector3(0.5f, 1, -1);
         JumpTo.GetComponent<SpriteRenderer>().enabled = false;
         Trail.Clear();
         Trail.Play();
-        //StartCoroutine(RepeatTween());
+        StartCoroutine(DelayStart());
+    }
+
+    IEnumerator DelayStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isPlaying = true;
     }
 
     private void Update()
