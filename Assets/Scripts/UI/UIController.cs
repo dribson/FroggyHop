@@ -164,6 +164,9 @@ public class UIController : MonoBehaviour
         MenuArea.localPosition = new Vector2(0, 0);
         CustomizeArea.localPosition = new Vector2(width, 0);
         ShopArea.localPosition = new Vector2(width * 2, 0);
+        UpdateUIScrollScale(SkinCustom);
+        UpdateUIScrollScale(HatCustom);
+        UpdateUIScrollScale(TrailCustom);
     }
 
     public void BeginGame()
